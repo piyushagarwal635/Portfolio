@@ -1,0 +1,874 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piyush Agarwal - Portfolio</title>
+  <style>
+    /* Base styles */
+:root {
+  --primary-color: #4f46e5;
+  --primary-light: #818cf8;
+  --primary-dark: #4338ca;
+  --secondary-color: #10b981;
+  --text-color: #1f2937;
+  --bg-color: #f8fafc;
+  --white: #ffffff;
+  --gradient: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideInLeft {
+  from { transform: translateX(-100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideInRight {
+  from { transform: translateX(100px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(50px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+}
+
+.slide-in-left {
+  opacity: 0;
+  animation: slideInLeft 1s ease forwards;
+}
+
+.slide-in-right {
+  opacity: 0;
+  animation: slideInRight 1s ease forwards;
+}
+
+.slide-up {
+  opacity: 0;
+  animation: slideUp 1s ease forwards;
+}
+
+/* Header */
+.header {
+  background-color: var(--white);
+  box-shadow: var(--shadow);
+  position: fixed;
+  width: 100%;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
+}
+
+.header.scrolled {
+  transform: translateY(-100%);
+}
+
+.header.visible {
+  transform: translateY(0);
+}
+
+.nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+}
+
+.logo {
+  font-size: 1.75rem;
+  font-weight: bold;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+}
+
+.nav-link {
+  color: var(--text-color);
+  text-decoration: none;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--primary-color);
+  background-color: rgba(79, 70, 229, 0.1);
+}
+
+/* Sections */
+.section {
+  padding: 6rem 0;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  width: 100%;
+}
+
+.section.visible {
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+/* About section */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+}
+
+.profile-image {
+  position: relative;
+  border-radius: 1rem;
+  overflow: hidden;
+  box-shadow: var(--shadow-lg);
+}
+
+.profile-image img {
+  width: 100%;
+  height: 400px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.profile-image:hover img {
+  transform: scale(1.05);
+}
+
+.about-content h2 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.about-content h3 {
+  font-size: 1.5rem;
+  margin: 2rem 0 1rem;
+  color: var(--primary-dark);
+}
+
+.education-list {
+  list-style: none;
+}
+
+.education-list li {
+  margin-bottom: 0.75rem;
+  padding-left: 1.5rem;
+  position: relative;
+}
+
+.education-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+}
+
+.skills-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.skill-tag {
+  background: var(--gradient);
+  color: var(--white);
+  padding: 0.5rem 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.skill-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+/* Projects section */
+.project-card {
+  background-color: var(--white);
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lg);
+  margin-top: 2rem;
+  border: 1px solid rgba(79, 70, 229, 0.1);
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.project-card h3 {
+  font-size: 1.75rem;
+  margin-bottom: 1rem;
+  color: var(--primary-dark);
+}
+
+.features {
+  margin-top: 1.5rem;
+}
+
+.features ul {
+  list-style: none;
+  margin-top: 0.75rem;
+}
+
+.features li {
+  margin-bottom: 0.75rem;
+  padding-left: 1.75rem;
+  position: relative;
+}
+
+.features li::before {
+  content: "→";
+  position: absolute;
+  left: 0;
+  color: var(--primary-color);
+}
+
+/* Certificates section */
+.certificates-section {
+  margin-top: 3rem;
+}
+
+.certificates-section h3 {
+  margin-bottom: 1.5rem;
+  color: var(--primary-dark);
+}
+
+/* Custom Carousel */
+.carousel {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  margin: 2rem 0;
+}
+
+.slides {
+  position: relative;
+  height: 100%;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.slide.active {
+  opacity: 1;
+}
+
+.slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.carousel-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  background: var(--white);
+  border: none;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 1.5rem;
+  box-shadow: var(--shadow);
+  color: var(--primary-color);
+  transition: all 0.3s ease;
+}
+
+.carousel-button:hover {
+  background: var(--primary-color);
+  color: var(--white);
+}
+
+.carousel-button.prev {
+  left: 1rem;
+}
+
+.carousel-button.next {
+  right: 1rem;
+}
+
+.carousel-dots {
+  position: absolute;
+  bottom: -2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem;
+}
+
+.carousel-dot {
+  width: 0.75rem;
+  height: 0.75rem;
+  border-radius: 50%;
+  background: var(--primary-light);
+  opacity: 0.5;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
+.carousel-dot.active {
+  opacity: 1;
+}
+
+/* Contact section */
+.contact-info {
+  max-width: 600px;
+  margin: 0 auto;
+  background: var(--white);
+  padding: 2.5rem;
+  border-radius: 1rem;
+  box-shadow: var(--shadow-lg);
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.contact-item:hover {
+  background-color: rgba(79, 70, 229, 0.1);
+}
+
+.icon {
+  width: 2rem;
+  height: 2rem;
+  color: var(--primary-color);
+}
+
+.contact-item a {
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.3s ease;
+  font-size: 1.1rem;
+}
+
+.contact-item a:hover {
+  color: var(--primary-color);
+}
+
+.social-links {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.social-link {
+  color: var(--text-color);
+  transition: all 0.3s ease;
+  padding: 0.75rem;
+  border-radius: 50%;
+  background-color: rgba(79, 70, 229, 0.1);
+}
+
+.social-link:hover {
+  color: var(--white);
+  background: var(--gradient);
+  transform: translateY(-2px);
+}
+
+/* Footer */
+.footer {
+  background: var(--gradient);
+  color: var(--white);
+  padding: 2rem 0;
+  text-align: center;
+}
+
+/* Image Popup */
+.popup {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  z-index: 1100;
+  padding: 2rem;
+}
+
+.popup img {
+  max-width: 90%;
+  max-height: 90vh;
+  margin: auto;
+  display: block;
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.close-popup {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  color: var(--white);
+  font-size: 2.5rem;
+  cursor: pointer;
+  z-index: 1101;
+}
+
+.zoomable {
+  cursor: zoom-in;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .nav {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .nav-links {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.5rem;
+  }
+
+  .section {
+    padding: 4rem 0;
+  }
+
+  .carousel {
+    height: 300px;
+  }
+
+  .profile-image img {
+    height: 300px;
+  }
+}
+  </style>
+</head>
+<body>
+  <div id="imagePopup" class="popup">
+    <span class="close-popup">&times;</span>
+    <img id="popupImage" src="" alt="Enlarged Image">
+  </div>
+
+  <header class="header">
+    <nav class="nav container">
+      <h1 class="logo">Piyush Agarwal</h1>
+      <div class="nav-links">
+        <a href="#about" class="nav-link active">About</a>
+        <a href="#projects" class="nav-link">Projects</a>
+        <a href="#certificates" class="nav-link">Certificates</a>
+        <a href="#contact" class="nav-link">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="about" class="section fade-in">
+      <div class="container about-grid">
+        <div class="profile-image slide-in-left">
+          <img src="WhatsApp Image 2025-03-22 at 23.03.37_df775f2d.jpg" 
+               alt="Profile" 
+               class="zoomable">
+        </div>
+        <div class="about-content slide-in-right">
+          <h2>About Me</h2>
+          <p>I'm a Full Stack Developer currently pursuing BCA from Dr. MPS College of Institution (2024 batch).
+             I'm passionate about creating robust and scalable applications using modern technologies.</p>
+          
+          <h3>Education</h3>
+          <ul class="education-list">
+            <li>BCA - Dr. MPS College of Institution (2024-Present)</li>
+            <li>12th - Saraswati Vidya Mandir, Kamla Nagar, Agra (CBSE Board)</li>
+            <li>10th - Saraswati Vidya Mandir, Kamla Nagar, Agra (CBSE Board)</li>
+          </ul>
+
+          <h3>Skills</h3>
+          <div class="skills-grid">
+            <span class="skill-tag">HTML</span>
+            <span class="skill-tag">CSS</span>
+            <span class="skill-tag">JavaScript</span>
+            <span class="skill-tag">Java</span>
+            <span class="skill-tag">Angular</span>
+            <span class="skill-tag">Bootstrap</span>
+            <span class="skill-tag">Kendo UI</span>
+            <span class="skill-tag">Font Awesome</span>
+            <span class="skill-tag">SQL</span>
+            <span class="skill-tag">React</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="projects" class="section fade-in">
+      <div class="container">
+        <h2>Featured Project</h2>
+        <div class="project-card slide-up">
+          <h3>Enterprise Management System</h3>
+          <p>A comprehensive industry-level project built with Angular, Java, and SQL. This full-stack application
+             demonstrates my ability to create enterprise-grade solutions.</p>
+          <div class="features">
+            <h4>Key Features:</h4>
+            <ul>
+              <li>User authentication and authorization</li>
+              <li>Real-time data synchronization</li>
+              <li>Advanced reporting and analytics</li>
+              <li>RESTful API integration</li>
+              <li>Responsive dashboard with Kendo UI components</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="certificates" class="section fade-in">
+      <div class="container">
+        <h2>Certificates</h2>
+        
+        <div class="certificates-section" style="width: 500px; text-align: center; height: 600px;">
+          <h3>Infosys Certificates</h3>
+          <div class="carousel">
+            <button class="carousel-button prev" data-carousel-button="prev">&#8592;</button>
+            <button class="carousel-button next" data-carousel-button="next">&#8594;</button>
+            <ul class="slides">
+              <li class="slide active">
+                <img src="IMG-20250323-WA0001.jpg" 
+                     alt="Infosys Certificate 1" 
+                     class="zoomable">
+              </li>
+              <li class="slide">
+                <img src="IMG-20250323-WA0002.jpg" 
+                     alt="Infosys Certificate 2" 
+                     class="zoomable">
+              </li>
+              <li class="slide active">
+                <img src="IMG-20250323-WA0003.jpg" 
+                     alt="Infosys Certificate 3" 
+                     class="zoomable">
+              </li>
+              <li class="slide active">
+                <img src="IMG-20250323-WA0004.jpg" 
+                     alt="Infosys Certificate 4" 
+                     class="zoomable">
+              </li>
+              <li class="slide active">
+                <img src="IMG-20250323-WA0005.jpg" 
+                     alt="Infosys Certificate 5" 
+                     class="zoomable">
+              </li>
+              <li class="slide active">
+                <img src="IMG-20250323-WA0006.jpg" 
+                     alt="Infosys Certificate 6" 
+                     class="zoomable">
+              </li>
+              <li class="slide active">
+                <img src="IMG-20250323-WA0007.jpg" 
+                     alt="Infosys Certificate 7" 
+                     class="zoomable">
+              </li>
+              <li class="slide active">
+                <img src="IMG-20250323-WA0008.jpg" 
+                     alt="Infosys Certificate 8" 
+                     class="zoomable">
+              </li>
+              <li class="slide active">
+                <img src="IMG-20250323-WA0009.jpg" 
+                     alt="Infosys Certificate 9" 
+                     class="zoomable">
+              </li>
+            </ul>
+            <div class="carousel-dots"></div>
+          </div>
+        </div>
+        <!-- <div class="certificates-section">
+          <h3>Microsoft Certificates</h3>
+          <div class="carousel">
+            <button class="carousel-button prev" data-carousel-button="prev">&#8592;</button>
+            <button class="carousel-button next" data-carousel-button="next">&#8594;</button>
+            <ul class="slides">
+              <li class="slide active">
+                <img src="https://images.unsplash.com/photo-1517245386807-bb43f82c33c4?w=800&auto=format&fit=crop" 
+                     alt="Microsoft Certificate 1" 
+                     class="zoomable">
+              </li>
+              <li class="slide">
+                <img src="https://images.unsplash.com/photo-1517245408515-9fcbcb979c6e?w=800&auto=format&fit=crop" 
+                     alt="Microsoft Certificate 2" 
+                     class="zoomable">
+              </li>
+            </ul>
+            <div class="carousel-dots"></div>
+          </div>
+        </div> -->
+      </div>
+    </section>
+
+    <section id="contact" class="section fade-in">
+      <div class="container">
+        <h2>Contact Me</h2>
+        <div class="contact-info slide-up">
+          <div class="contact-item">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M20.01 15.38c-1.23 0-2.42-.2-3.53-.56a.977.977 0 0 0-1.01.24l-1.57 1.97c-2.83-1.35-5.48-3.9-6.89-6.83l1.95-1.66c.27-.28.35-.67.24-1.02c-.37-1.11-.56-2.3-.56-3.53c0-.54-.45-.99-.99-.99H4.19C3.65 3 3 3.24 3 3.99C3 13.28 10.73 21 20.01 21c.71 0 .99-.63.99-1.18v-3.45c0-.54-.45-.99-.99-.99z"/>
+            </svg>
+            <a href="tel:9897673276">+91 9897673276</a>
+          </div>
+          <div class="contact-item">
+            <svg class="icon" viewBox="0 0 24 24">
+              <path fill="currentColor" d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5l-8-5V6l8 5l8-5v2z"/>
+            </svg>
+            <a href="mailto:piyushagarwal352006@gmail.com">piyushagarwal352006@gmail.com</a>
+          </div>
+          <div class="social-links">
+            <a href="https://www.linkedin.com/in/piyush-agarwal-930ba5327" target="_blank" rel="noopener noreferrer" class="social-link">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/>
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/agarwal__xx_path__?utm_source=qr&igsh=NDdlYmNuMGZrZXU1"  class="social-link">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M7.8 2h8.4C19.4 2 22 4.6 22 7.8v8.4a5.8 5.8 0 0 1-5.8 5.8H7.8C4.6 22 2 19.4 2 16.2V7.8A5.8 5.8 0 0 1 7.8 2m-.2 2A3.6 3.6 0 0 0 4 7.6v8.8C4 18.39 5.61 20 7.6 20h8.8a3.6 3.6 0 0 0 3.6-3.6V7.6C20 5.61 18.39 4 16.4 4H7.6m9.65 1.5a1.25 1.25 0 0 1 1.25 1.25A1.25 1.25 0 0 1 17.25 8A1.25 1.25 0 0 1 16 6.75a1.25 1.25 0 0 1 1.25-1.25M12 7a5 5 0 0 1 5 5a5 5 0 0 1-5 5a5 5 0 0 1-5-5a5 5 0 0 1 5-5m0 2a3 3 0 0 0-3 3a3 3 0 0 0 3 3a3 3 0 0 0 3-3a3 3 0 0 0-3-3z"/>
+              </svg>
+            </a>
+            <a href="https://www.facebook.com/share/1XdnA44ewf" target="_blank" rel="noopener noreferrer" class="social-link">
+              <svg class="icon" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M12 2.04C6.5 2.04 2 6.53 2 12.06C2 17.06 5.66 21.21 10.44 21.96V14.96H7.9V12.06H10.44V9.85C10.44 7.34 11.93 5.96 14.22 5.96C15.31 5.96 16.45 6.15 16.45 6.15V8.62H15.19C13.95 8.62 13.56 9.39 13.56 10.18V12.06H16.34L15.89 14.96H13.56V21.96A10 10 0 0 0 22 12.06C22 6.53 17.5 2.04 12 2.04z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>© 2024 Piyush Agarwal. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script>
+    // Header scroll behavior
+let lastScroll = 0;
+const header = document.querySelector('.header');
+const scrollThreshold = 100;
+
+window.addEventListener('scroll', () => {
+  const currentScroll = window.pageYOffset;
+
+  if (currentScroll <= 0) {
+    header.classList.remove('scrolled');
+    header.classList.remove('visible');
+    return;
+  }
+
+  if (currentScroll > lastScroll && currentScroll > scrollThreshold) {
+    // Scrolling down
+    header.classList.add('scrolled');
+    header.classList.remove('visible');
+  } else {
+    // Scrolling up
+    header.classList.remove('scrolled');
+    header.classList.add('visible');
+  }
+
+  lastScroll = currentScroll;
+});
+
+// Active navigation link
+const sections = document.querySelectorAll('section');
+const navLinks = document.querySelectorAll('.nav-link');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+
+  sections.forEach(section => {
+    const sectionTop = section.offsetTop;
+    const sectionHeight = section.clientHeight;
+    
+    if (window.pageYOffset >= sectionTop - 200) {
+      current = section.getAttribute('id');
+    }
+  });
+
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href').slice(1) === current) {
+      link.classList.add('active');
+    }
+  });
+});
+
+// Scroll animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, observerOptions);
+
+document.querySelectorAll('.section').forEach(section => {
+  observer.observe(section);
+});
+
+// Custom Carousel
+class Carousel {
+  constructor(container) {
+    this.container = container;
+    this.slides = container.querySelector('.slides').children;
+    this.totalSlides = this.slides.length;
+    this.currentSlide = 0;
+
+    // Create dots
+    const dotsContainer = container.querySelector('.carousel-dots');
+    for (let i = 0; i < this.totalSlides; i++) {
+      const dot = document.createElement('div');
+      dot.classList.add('carousel-dot');
+      if (i === 0) dot.classList.add('active');
+      dot.addEventListener('click', () => this.goToSlide(i));
+      dotsContainer.appendChild(dot);
+    }
+    this.dots = dotsContainer.children;
+
+    // Add button listeners
+    container.querySelector('[data-carousel-button="prev"]')
+      .addEventListener('click', () => this.move('prev'));
+    container.querySelector('[data-carousel-button="next"]')
+      .addEventListener('click', () => this.move('next'));
+
+    // Auto advance
+    this.startAutoAdvance();
+  }
+
+  move(direction) {
+    this.slides[this.currentSlide].classList.remove('active');
+    this.dots[this.currentSlide].classList.remove('active');
+
+    if (direction === 'next') {
+      this.currentSlide = (this.currentSlide + 1) % this.totalSlides;
+    } else {
+      this.currentSlide = (this.currentSlide - 1 + this.totalSlides) % this.totalSlides;
+    }
+
+    this.slides[this.currentSlide].classList.add('active');
+    this.dots[this.currentSlide].classList.add('active');
+  }
+
+  goToSlide(index) {
+    this.slides[this.currentSlide].classList.remove('active');
+    this.dots[this.currentSlide].classList.remove('active');
+    this.currentSlide = index;
+    this.slides[this.currentSlide].classList.add('active');
+    this.dots[this.currentSlide].classList.add('active');
+  }
+
+  startAutoAdvance() {
+    setInterval(() => this.move('next'), 5000);
+  }
+}
+
+// Initialize carousels
+document.querySelectorAll('.carousel').forEach(carousel => {
+  new Carousel(carousel);
+});
+
+// Image popup functionality
+const popup = document.getElementById('imagePopup');
+const popupImg = document.getElementById('popupImage');
+const closePopup = document.querySelector('.close-popup');
+const zoomableImages = document.querySelectorAll('.zoomable');
+
+zoomableImages.forEach(img => {
+  img.addEventListener('click', () => {
+    popup.style.display = 'block';
+    popupImg.src = img.src;
+  });
+});
+
+closePopup.addEventListener('click', () => {
+  popup.style.display = 'none';
+});
+
+popup.addEventListener('click', (e) => {
+  if (e.target === popup) {
+    popup.style.display = 'none';
+  }
+});
+  </script>
+</body>
+</html>
